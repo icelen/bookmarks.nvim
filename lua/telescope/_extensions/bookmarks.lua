@@ -9,19 +9,26 @@ local function display_func(opts)
     local displayer = entry_display.create {
         separator = " |",
         items = {
-            { width = 43 },
+            { width = 3 },
+            { width = 33 },
+            { width = 5 },
             { width = 20 },
             { remaining = true },
         }
     }
 
+    local line_info = { opts.lnum, "TelescopeResultsLineNr" }
+    local updated_at = os.date("%Y-%m-%d %H:%M:%S", opts["value"].updated_at)
+
     local common_len = helper.get_str_common_len(vim.fn.getcwd(), opts["filename"])
     local file_name = string.sub(opts["filename"], common_len + 2)
     local icon = (require 'nvim-web-devicons'.get_icon(opts.filename)) or ""
     return displayer {
+        line_info,
         opts["value"]["description"],
-        icon .. " " .. file_name,
+        opts["value"]["fre"],
         updated_at,
+        icon .. " " .. file_name,
     }
 end
 
