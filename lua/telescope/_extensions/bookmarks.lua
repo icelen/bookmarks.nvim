@@ -9,14 +9,11 @@ local function display_func(opts)
     local displayer = entry_display.create {
         separator = " |",
         items = {
-            { width = 55 },
-            { width = 30 },
+            { width = 43 },
+            { width = 20 },
             { remaining = true },
         }
     }
-
-    local line_info = { opts.lnum, "TelescopeResultsLineNr" }
-    local updated_at = os.date("%Y-%m-%d %H:%M:%S", opts["value"].updated_at)
 
     local common_len = helper.get_str_common_len(vim.fn.getcwd(), opts["filename"])
     local file_name = string.sub(opts["filename"], common_len + 2)
